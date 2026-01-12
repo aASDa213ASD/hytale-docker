@@ -1,0 +1,66 @@
+# Untested til the 13.01.2026
+
+Docker setup for running the Hytale dedicated server.
+
+This container downloads/updates the server on startup using the official Hytale Downloader CLI, then starts `HytaleServer.jar` with the options configured via environment variables.
+
+## Ports
+
+- UDP `5520` (default)
+
+## Environment variables
+
+These are set in `docker-compose.yml`. You can change them there or move them into a `.env` and reference them from Compose.
+
+### Server / networking
+
+- `HYTALE_PORT` (default: `5520`)
+  - Server port.
+- `BIND_ADDR` (default: `0.0.0.0`)
+  - Bind address.
+
+### Assets / auth
+
+- `ASSETS_PATH` (default: `/hytale/Assets.zip`)
+  - Path to the server assets zip inside the container.
+- `AUTH_MODE` (default: `authenticated`)
+  - Authentication mode passed to the server.
+
+### Updates
+
+- `ENABLE_AUTO_UPDATE` (default: `true`)
+  - If `true`, runs `./hytale-downloader` on every container start.
+
+### AOT cache
+
+- `USE_AOT_CACHE` (default: `true`)
+  - If `true` and `/hytale/Server/HytaleServer.aot` exists, adds `-XX:AOTCache=HytaleServer.aot`.
+
+### Flags
+
+- `ACCEPT_EARLY_PLUGINS` (default: `false`)
+  - Adds `--accept-early-plugins`.
+- `ALLOW_OP` (default: `false`)
+  - Adds `--allow-op`.
+- `DISABLE_SENTRY` (default: `false`)
+  - Adds `--disable-sentry`.
+
+### Backups
+
+- `BACKUP_ENABLED` (default: `false`)
+  - If `true`, adds backup arguments.
+- `BACKUP_DIR` (default: `/hytale/backups`)
+  - Backup output directory inside the container.
+- `BACKUP_FREQUENCY` (default: `30`)
+  - Backup frequency.
+
+### Java memory
+
+- `JAVA_XMS` (default: `4G`)
+  - Adds `-Xms`.
+- `JAVA_XMX` (default: `4G`)
+  - Adds `-Xmx`.
+
+## Notes
+
+- If the downloader fails with a `403 Forbidden`, the startup script clears `~/.hytale-downloader-credentials.json` and retries on next start.
