@@ -26,6 +26,17 @@ These are set in `docker-compose.yml`. You can change them there or move them in
 - `AUTH_MODE` (default: `authenticated`)
   - Authentication mode passed to the server.
 
+#### Server Provider Authentication
+
+You can pass auth tokens to the server. These are **not set by default** and the startup script only adds the flags when the variables are present:
+
+- `SESSION_TOKEN` (optional)
+  - Adds `--session-token "<sessionToken>"`
+- `IDENTITY_TOKEN` (optional)
+  - Adds `--identity-token "<identityToken>"`
+- `OWNER_UUID` (optional)
+  - Adds `--owner-uuid "<uuid>"`
+
 ### Updates
 
 - `ENABLE_AUTO_UPDATE` (default: `true`)
@@ -64,3 +75,8 @@ These are set in `docker-compose.yml`. You can change them there or move them in
 ## Notes
 
 - If the downloader fails with a `403 Forbidden`, the startup script clears `~/.hytale-downloader-credentials.json` and retries on next start.
+
+## Docs
+
+- Server Provider Authentication Guide: https://support.hytale.com/hc/en-us/articles/45328341414043-Server-Provider-Authentication-Guide
+- Hytale Server Manual: https://support.hytale.com/hc/en-us/articles/45326769420827-Hytale-Server-Manual

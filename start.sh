@@ -47,6 +47,11 @@ fi
 
 ARGS="--port $HYTALE_PORT --assets $ASSETS_PATH --auth-mode $AUTH_MODE"
 
+# Provider authentication tokens, Only append when env vars are set
+[ -n "$SESSION_TOKEN" ] && ARGS="$ARGS --session-token \"$SESSION_TOKEN\""
+[ -n "$IDENTITY_TOKEN" ] && ARGS="$ARGS --identity-token \"$IDENTITY_TOKEN\""
+[ -n "$OWNER_UUID" ] && ARGS="$ARGS --owner-uuid \"$OWNER_UUID\""
+
 [ "$ACCEPT_EARLY_PLUGINS" = "true" ] && ARGS="$ARGS --accept-early-plugins"
 [ "$ALLOW_OP" = "true" ] && ARGS="$ARGS --allow-op"
 [ "$DISABLE_SENTRY" = "true" ] && ARGS="$ARGS --disable-sentry"
