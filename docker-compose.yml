@@ -3,6 +3,8 @@ services:
   hytale-server:
     build: .
     container_name: hytale
+    stdin_open: true
+    tty: true
     ports:
       - "5520:5520/udp"
     volumes:
