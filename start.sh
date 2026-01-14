@@ -128,6 +128,10 @@ fi
 
 ARGS="$ARGS --bind $BIND_ADDR:$HYTALE_PORT"
 
+# Additional server options
+HYTALE_ADDITIONAL_OPTS="${HYTALE_ADDITIONAL_OPTS:-}"
+[ -n "$HYTALE_ADDITIONAL_OPTS" ] && ARGS="$ARGS $HYTALE_ADDITIONAL_OPTS"
+
 echo "Starting Hytale server:"
 echo "$JAVA_CMD -jar HytaleServer.jar $ARGS"
 exec $JAVA_CMD -jar HytaleServer.jar $ARGS
