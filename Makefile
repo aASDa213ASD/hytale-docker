@@ -2,16 +2,12 @@
 SHELL := /usr/bin/env bash
 MAKEFLAGS += --no-builtin-rules --warn-undefined-variables
 
-VERBOSE ?= 0
-NO_COLOR ?= 0
-
 COMPOSE := docker compose -f docker-compose.yml
 SERVICE ?= hytale-server
-CMD ?= list
 WAIT_TIMEOUT ?= 300
 
 # ---- Targets ---------------------------------------------------------------
-.PHONY: build up down restart status logs in update update-hytale-downloader auth attach help
+.PHONY: build up down restart status logs in update update-hytale-downloader attach help
 
 ##@ Container
 build: ## Build server docker image
